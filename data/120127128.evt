@@ -1,9 +1,4 @@
 <EMSE_Event_List>
-<bSaveNotation>0</bSaveNotation>
-<sQID></sQID>
-<bUseQID>1</bUseQID>
-<Event><Name>[seg]</Name><Start>0</Start><Stop>0</Stop><Status>1</Status><Color>255</Color><Attribute>0</Attribute><TimeStart>0</TimeStart><TimeStop>0</TimeStop><FreqStart>0</FreqStart><FreqStop>0</FreqStop><FWHM_Time>0</FWHM_Time><FWHM_Freq>0</FWHM_Freq></Event>
-<Event><Name>255</Name><Start>330</Start><Stop>330</Stop><Status>2</Status><Color>65535</Color><Attribute>0</Attribute><TimeStart>0</TimeStart><TimeStop>0</TimeStop><FreqStart>0</FreqStart><FreqStop>0</FreqStop><FWHM_Time>0</FWHM_Time><FWHM_Freq>0</FWHM_Freq></Event>
 <Event><Name>O</Name><Start>30655</Start><Stop>36819</Stop><Status>2</Status><Color>16711935</Color><Attribute>0</Attribute><TimeStart>0</TimeStart><TimeStop>0</TimeStop><FreqStart>0</FreqStart><FreqStop>0</FreqStop><FWHM_Time>0</FWHM_Time><FWHM_Freq>0</FWHM_Freq></Event>
 <Event><Name>111</Name><Start>30664</Start><Stop>30664</Stop><Status>2</Status><Color>65535</Color><Attribute>0</Attribute><TimeStart>0</TimeStart><TimeStop>0</TimeStop><FreqStart>0</FreqStart><FreqStop>0</FreqStop><FWHM_Time>0</FWHM_Time><FWHM_Freq>0</FWHM_Freq></Event>
 <Event><Name>O</Name><Start>37226</Start><Stop>39072</Stop><Status>2</Status><Color>16711935</Color><Attribute>0</Attribute><TimeStart>0</TimeStart><TimeStop>0</TimeStop><FreqStart>0</FreqStart><FreqStop>0</FreqStop><FWHM_Time>0</FWHM_Time><FWHM_Freq>0</FWHM_Freq></Event>
@@ -20,7 +15,6 @@
 <Event><Name>214</Name><Start>107513</Start><Stop>107513</Stop><Status>2</Status><Color>65535</Color><Attribute>0</Attribute><TimeStart>0</TimeStart><TimeStop>0</TimeStop><FreqStart>0</FreqStart><FreqStop>0</FreqStop><FWHM_Time>0</FWHM_Time><FWHM_Freq>0</FWHM_Freq></Event>
 <Event><Name>105</Name><Start>114099</Start><Stop>114099</Stop><Status>2</Status><Color>65535</Color><Attribute>0</Attribute><TimeStart>0</TimeStart><TimeStop>0</TimeStop><FreqStart>0</FreqStart><FreqStop>0</FreqStop><FWHM_Time>0</FWHM_Time><FWHM_Freq>0</FWHM_Freq></Event>
 <Event><Name>C</Name><Start>114734</Start><Stop>129470</Stop><Status>2</Status><Color>16711935</Color><Attribute>0</Attribute><TimeStart>0</TimeStart><TimeStop>0</TimeStop><FreqStart>0</FreqStart><FreqStop>0</FreqStop><FWHM_Time>0</FWHM_Time><FWHM_Freq>0</FWHM_Freq></Event>
-<Event><Name>222</Name><Start>119086</Start><Stop>119086</Stop><Status>2</Status><Color>16776960</Color><Attribute>0</Attribute><TimeStart>0</TimeStart><TimeStop>0</TimeStop><FreqStart>0</FreqStart><FreqStop>0</FreqStop><FWHM_Time>0</FWHM_Time><FWHM_Freq>0</FWHM_Freq></Event>
 <Event><Name>205</Name><Start>129470</Start><Stop>129470</Stop><Status>2</Status><Color>65535</Color><Attribute>0</Attribute><TimeStart>0</TimeStart><TimeStop>0</TimeStop><FreqStart>0</FreqStart><FreqStop>0</FreqStop><FWHM_Time>0</FWHM_Time><FWHM_Freq>0</FWHM_Freq></Event>
 <Event><Name>116</Name><Start>133949</Start><Stop>133949</Stop><Status>2</Status><Color>65535</Color><Attribute>0</Attribute><TimeStart>0</TimeStart><TimeStop>0</TimeStop><FreqStart>0</FreqStart><FreqStop>0</FreqStop><FWHM_Time>0</FWHM_Time><FWHM_Freq>0</FWHM_Freq></Event>
 <Event><Name>O</Name><Start>136169</Start><Stop>149279</Stop><Status>2</Status><Color>16711935</Color><Attribute>0</Attribute><TimeStart>0</TimeStart><TimeStop>0</TimeStop><FreqStart>0</FreqStart><FreqStop>0</FreqStop><FWHM_Time>0</FWHM_Time><FWHM_Freq>0</FWHM_Freq></Event>
