@@ -1,24 +1,23 @@
-""" 
-This script computes stats for the evt files in data/.
-After each clean-up or transformation, run this in order
-to see if anything's changed.
+"""
+This script computes and displays stats for the evt files in data/raw.
 """
 
 import os
-import sys
 import glob
 
 import xmltodict
 import pandas as pd
 
+
 def get_filelist(import_path, extension):
-  """ 
+  """
   Returns list of file paths from import_path with specified extension.
   """
   filelist = []
   for root, dirs, files in os.walk(import_path):
       filelist += glob.glob(os.path.join(root, '*.' + extension))
       return filelist
+
 
 def get_event_file(filepath, include_clean_segs=True):
     events = {}
@@ -48,12 +47,14 @@ def get_event_file(filepath, include_clean_segs=True):
             n += 1
     return events
 
+
 def print_events(files, include_clean_segs=False):
     for file in files:
         evts = get_event_file(file, include_clean_segs)
         print(file.split('/')[-1])
         for i in range(len(evts)):
             print(evts[i]['type'])
+
 
 def get_num_extractable_windows(events, print_info=True):
     """
@@ -86,6 +87,7 @@ def get_num_extractable_windows(events, print_info=True):
         print('Total seconds able to be extracted: ', total_secs)
     total_secs = total_wins + 1
     return total_wins, total_secs
+
 
 def print_evt_information(filepath, include_clean_segs=False, print_in_secs=True):
     """
@@ -124,7 +126,8 @@ def print_evt_information(filepath, include_clean_segs=False, print_in_secs=True
         print('{0} | eyesc_trials: {1} | eyeso_trials: {2} | eyesc_trial_length: {3} | eyeso_trial_length: {4}'.format(\
             filepath.split('/')[-1], eyesc_trials, eyeso_trials, eyesc_trial_length, eyeso_trial_length))
 
-files = get_filelist('data/', 'evt')
+
+files = get_filelist('data/raw/', 'evt')
 for f in files:
     clean_segs = []
     events = get_event_file(f, include_clean_segs=True)
@@ -146,4 +149,3 @@ for f in files:
     print_evt_information(f)
     print('\tN Extractable EyesC Wins: {} | N Extractable EyesC Secs: {}'.format(nwins_eyesc, nsecs_eyesc))
     print('\tN Extractable EyesO Wins: {} | N Extractable EyesO Secs: {}'.format(nwins_eyeso, nsecs_eyeso))
-

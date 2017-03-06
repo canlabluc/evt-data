@@ -1,27 +1,28 @@
 """
-This file removes segments which have indicate when the trial
-begins and ends, but have been erroneously marked as indicating
-clean data.
+This file removes segments which indicate when a trial begins
+and ends, but have erroneously been marked as being clean segment
+indicators.
 
-These are removed from the df-transformed evt files. Run
-transform_data_to_df.py prior to running this script.
+This operates on df-tranformed evt files. Run transform_data_to_df.py
+prior to running this script.
 """
 
 import os
-import sys
 import glob
 
 import numpy as np
 import pandas as pd
 
+
 def get_filelist(import_path, extension):
-  """
-  Returns list of file paths from import_path with specified extension.
-  """
-  filelist = []
-  for root, dirs, files in os.walk(import_path):
-      filelist += glob.glob(os.path.join(root, '*.' + extension))
-      return filelist
+    """
+    Returns list of file paths from import_path with specified extension.
+    """
+    filelist = []
+    for root, dirs, files in os.walk(import_path):
+        filelist += glob.glob(os.path.join(root, '*.' + extension))
+        return filelist
+
 
 TYPES_START = ['11', '10']
 TYPES_STOP = ['21', '20']
@@ -43,8 +44,8 @@ for f in files:
         # If we find a segment marked as clean in the intertrial period, mark
         # it as bad and remove it from the .evt file.
         if (df.iloc[i].Type[0:2] in SEGS_START and
-            intertrial == True and
-            (df.iloc[i+1].Latency - df.iloc[i].Latency)/512 > 29):
+           intertrial is True and
+           (df.iloc[i+1].Latency - df.iloc[i].Latency)/512 > 29):
             bad_idx.append(i)
             bad_idx.append(i+1)
     df = df.drop(bad_idx)

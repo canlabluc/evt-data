@@ -1,10 +1,8 @@
 """
-Removes segments that have been marked as clean and sit inside of the
-intertrial space.
+Checks files that are output from rm_intertrial_segs.py
 """
 
 import os
-import sys
 import glob
 
 import numpy as np
@@ -19,6 +17,7 @@ def get_filelist(import_path, extension):
         filelist += glob.glob(os.path.join(root, '*.' + extension))
         return filelist
 
+
 def get_previous_trial(code_latency, trials):
     """
     Returns closest previous trial to the provided latency from the dataframe
@@ -27,6 +26,7 @@ def get_previous_trial(code_latency, trials):
     prev_trial = trials[trials.Latency < code_latency].tail(1)
     return prev_trial.set_index(np.arange(0, prev_trial.shape[0], 1))
 
+
 def get_next_trial(code_latency, trials):
     """
     Returns the closest next trial to the provided latency from the dataframe
@@ -34,6 +34,7 @@ def get_next_trial(code_latency, trials):
     """
     next_trial = trials[trials.Latency > code_latency].head(1)
     return next_trial.set_index(np.arange(0, next_trial.shape[0], 1))
+
 
 def in_intertrial(code_latency, trials):
     """
@@ -47,6 +48,7 @@ def in_intertrial(code_latency, trials):
             return False
     except:
         return True
+
 
 def print_seg_code_information(df, i, trials, error_type):
     try:
@@ -73,11 +75,12 @@ def print_seg_code_information(df, i, trials, error_type):
         ntrial_latency/512
     ))
 
+
 SEGS_START = ['C1', 'O1']
 SEGS_STOP = ['C2', 'O2']
 TRIALS_START = ['11', '10']
 TRIALS_STOP = ['21', '20']
-files = get_filelist('df-data-cleaner/', 'evt')
+files = get_filelist('data/clean/', 'evt')
 for f in files:
     fname = f.split('/')[-1]
     df = pd.read_csv(f, sep='\t')

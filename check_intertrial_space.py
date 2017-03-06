@@ -1,3 +1,7 @@
+"""
+Prints any clean segment markers that fall inside of the intertrial space.
+"""
+
 import os
 import glob
 
@@ -43,12 +47,14 @@ def get_event_file(filepath, include_clean_segs=True):
             n += 1
     return events
 
+
 def print_events(files, include_clean_segs=False):
     for file in files:
         evts = get_event_file(file, include_clean_segs)
         print(file.split('/')[-1])
         for i in range(len(evts)):
             print(evts[i]['type'])
+
 
 def print_evt_information(filepath, print_in_secs=True):
     """
@@ -83,12 +89,12 @@ def print_evt_information(filepath, print_in_secs=True):
     print('{0} | eyesc_trials: {1} | eyeso_trials: {2} | eyesc_trial_length: {3} | eyeso_trial_length: {4}'.format(\
         filepath.split('/')[-1], eyesc_trials, eyeso_trials, eyesc_trial_length, eyeso_trial_length))
 
-importpath = '/Users/jorge/Desktop/test/'
+importpath = 'data/clean/'
 extension = 'evt'
 
 files = get_filelist(importpath, extension)
 for f in files:
-    df = pd.read_csv(f)
+    df = pd.read_csv(f, sep='\t')
 
     name = f.split('/')[-1]
     print(name)

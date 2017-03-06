@@ -1,14 +1,15 @@
 """
-Removes segments that have been marked as clean and sit inside of the
-intertrial space.
+Final step in processing. Trims clean segments if they partially sit in the
+intertrial space, or outright removes them if they wholly sit in intertrial
+space.
 """
 
 import os
-import sys
 import glob
 
 import numpy as np
 import pandas as pd
+
 
 def get_filelist(import_path, extension):
     """
@@ -19,6 +20,7 @@ def get_filelist(import_path, extension):
         filelist += glob.glob(os.path.join(root, '*.' + extension))
         return filelist
 
+
 def get_previous_trial(code_latency, trials):
     """
     Returns closest previous trial to the provided latency from the dataframe
@@ -27,6 +29,7 @@ def get_previous_trial(code_latency, trials):
     prev_trial = trials[trials.Latency < code_latency].tail(1)
     return prev_trial.set_index(np.arange(0, prev_trial.shape[0], 1))
 
+
 def get_next_trial(code_latency, trials):
     """
     Returns the closest next trial to the provided latency from the dataframe
@@ -34,6 +37,7 @@ def get_next_trial(code_latency, trials):
     """
     next_trial = trials[trials.Latency > code_latency].head(1)
     return next_trial.set_index(np.arange(0, next_trial.shape[0], 1))
+
 
 def in_intertrial(code_latency, trials):
     """
@@ -48,6 +52,7 @@ def in_intertrial(code_latency, trials):
     except:
         return True
 
+
 def print_seg_code_information(df, i, trials, error_type):
     try:
         ptrial_code = get_previous_trial(df.iloc[i].Latency, trials).Type.all()
@@ -61,17 +66,18 @@ def print_seg_code_information(df, i, trials, error_type):
     except:
         ntrial_code = 'EOF'
         ntrial_latency = -1
-    print(error_type + ': {} | PREV: {}:{:0.2f} | {}:{:0.2f}->{}:{:0.2f} | NEXT: {}:{:0.2f}'.format(\
-        fname,\
-        ptrial_code,\
-        ptrial_latency/512,\
-        df.iloc[i].Type,\
-        df.iloc[i].Latency/512,\
-        df.iloc[i+1].Type,\
-        df.iloc[i+1].Latency/512,\
-        ntrial_code,\
+    print(error_type + ': {} | PREV: {}:{:0.2f} | {}:{:0.2f}->{}:{:0.2f} | NEXT: {}:{:0.2f}'.format(
+        fname,
+        ptrial_code,
+        ptrial_latency/512,
+        df.iloc[i].Type,
+        df.iloc[i].Latency/512,
+        df.iloc[i+1].Type,
+        df.iloc[i+1].Latency/512,
+        ntrial_code,
         ntrial_latency/512
     ))
+
 
 SEGS_START = ['C1', 'O1']
 SEGS_STOP = ['C2', 'O2']
@@ -93,7 +99,8 @@ for f in files:
         if df.iloc[i].Type in SEGS_START and (in_intertrial(df.iloc[i].Latency, trials) and
                                               in_intertrial(df.iloc[i+1].Latency, trials)):
             print_seg_code_information(df, i, trials, 'INTERTRIAL')
-            bad_idx.append(i); bad_idx.append(i+1)
+            bad_idx.append(i)
+            bad_idx.append(i+1)
             found_bad_segs = True
     df = df.drop(df.index[bad_idx])
     df = df.set_index(np.arange(0, df.shape[0], 1))

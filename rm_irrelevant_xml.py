@@ -10,13 +10,14 @@ import glob
 
 
 def get_filelist(import_path, extension):
-  """
-  Returns list of file paths from import_path with specified extension.
-  """
-  filelist = []
-  for root, dirs, files in os.walk(import_path):
-      filelist += glob.glob(os.path.join(root, '*.' + extension))
-      return filelist
+    """
+    Returns list of file paths from import_path with specified extension.
+    """
+    filelist = []
+    for root, dirs, files in os.walk(import_path):
+        filelist += glob.glob(os.path.join(root, '*.' + extension))
+        return filelist
+
 
 files = get_filelist('data/raw/', 'evt')
 for file in files:

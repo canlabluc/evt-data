@@ -4,20 +4,21 @@ a pandas dataframe.
 """
 
 import os
-import sys
 import glob
 
 import xmltodict
 import pandas as pd
 
+
 def get_filelist(import_path, extension):
-  """
-  Returns list of file paths from import_path with specified extension.
-  """
-  filelist = []
-  for root, dirs, files in os.walk(import_path):
-      filelist += glob.glob(os.path.join(root, '*.' + extension))
-      return filelist
+    """
+    Returns list of file paths from import_path with specified extension.
+    """
+    filelist = []
+    for root, dirs, files in os.walk(import_path):
+        filelist += glob.glob(os.path.join(root, '*.' + extension))
+        return filelist
+
 
 def get_event_file(filepath, include_clean_segs=True):
     events = {}
@@ -25,7 +26,7 @@ def get_event_file(filepath, include_clean_segs=True):
     xmlevents = xmlevents['EMSE_Event_List']['Event']
     n = 0
     for i in range(len(xmlevents)):
-        if include_clean_segs == True and xmlevents[i]['Name'] in ['C', 'O']:
+        if include_clean_segs is True and xmlevents[i]['Name'] in ['C', 'O']:
             # First, add front of clean segment
             events[n] = {'type': '', 'latency': 0, 'urevent': 0}
             events[n]['type'] = xmlevents[i]['Name'] + '1'
@@ -47,12 +48,14 @@ def get_event_file(filepath, include_clean_segs=True):
             n += 1
     return events
 
+
 def print_events(files, include_clean_segs=False):
     for file in files:
         evts = get_event_file(file, include_clean_segs)
         print(file.split('/')[-1])
         for i in range(len(evts)):
             print(evts[i]['type'])
+
 
 def print_evt_information(filepath, print_in_secs=True):
     """
@@ -82,10 +85,11 @@ def print_evt_information(filepath, print_in_secs=True):
     eyesc_trial_length /= eyesc_trials
     eyeso_trial_length /= eyeso_trials
     if print_in_secs:
-        eyesc_trial_length /= 512;
-        eyeso_trial_length /= 512;
-    print('{0} | eyesc_trials: {1} | eyeso_trials: {2} | eyesc_trial_length: {3} | eyeso_trial_length: {4}'.format(\
+        eyesc_trial_length /= 512
+        eyeso_trial_length /= 512
+    print('{0} | eyesc_trials: {1} | eyeso_trials: {2} | eyesc_trial_length: {3} | eyeso_trial_length: {4}'.format(
         filepath.split('/')[-1], eyesc_trials, eyeso_trials, eyesc_trial_length, eyeso_trial_length))
+
 
 import_path = 'data/clean/'
 extension = 'evt'
@@ -93,7 +97,7 @@ extension = 'evt'
 evt_files = get_filelist(import_path, extension)
 for i in range(len(evt_files)):
     events_dict = get_event_file(evt_files[i], include_clean_segs=True)
-    types     = [events_dict[j]['type'] for j in range(len(events_dict))]
+    types = [events_dict[j]['type'] for j in range(len(events_dict))]
     latencies = [events_dict[j]['latency'] for j in range(len(events_dict))]
 
     df = pd.DataFrame(data={'Type': types, 'Latency': latencies})
