@@ -1,17 +1,19 @@
 import os
-import sys
 import glob
 
 import pandas as pd
+import xmltodict
+
 
 def get_filelist(import_path, extension):
-  """ 
-  Returns list of file paths from import_path with specified extension.
-  """
-  filelist = []
-  for root, dirs, files in os.walk(import_path):
-      filelist += glob.glob(os.path.join(root, '*.' + extension))
-      return filelist
+    """
+    Returns list of file paths from import_path with specified extension.
+    """
+    filelist = []
+    for root, dirs, files in os.walk(import_path):
+        filelist += glob.glob(os.path.join(root, '*.' + extension))
+        return filelist
+
 
 def get_event_file(filepath, include_clean_segs=True):
     events = {}
@@ -106,17 +108,3 @@ for f in files:
             print('\nSEG IN INTERTRIAL. Previous: {} | {}'.format(df.iloc[i-1].Type, df.iloc[i-1].Latency))
             print('SEG IN INTERTRIAL: Current:  {} | Start: {} | Stop: {}'.format(df.iloc[i].Type, df.iloc[i].Latency, df.iloc[i+1].Latency))
             print('SEG IN INTERTRIAL: Next:     {} | {}'.format(df.iloc[i+2].Type, df.iloc[i+2].Latency))
-
-
-
-
-
-
-
-
-
-
-
-
-
-

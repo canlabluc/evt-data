@@ -11,7 +11,7 @@ import xmltodict
 import pandas as pd
 
 def get_filelist(import_path, extension):
-  """ 
+  """
   Returns list of file paths from import_path with specified extension.
   """
   filelist = []
@@ -87,7 +87,7 @@ def print_evt_information(filepath, print_in_secs=True):
     print('{0} | eyesc_trials: {1} | eyeso_trials: {2} | eyesc_trial_length: {3} | eyeso_trial_length: {4}'.format(\
         filepath.split('/')[-1], eyesc_trials, eyeso_trials, eyesc_trial_length, eyeso_trial_length))
 
-import_path = 'data/'
+import_path = 'data/clean/'
 extension = 'evt'
 
 evt_files = get_filelist(import_path, extension)
@@ -98,25 +98,4 @@ for i in range(len(evt_files)):
 
     df = pd.DataFrame(data={'Type': types, 'Latency': latencies})
     df = df[['Type', 'Latency']]
-    df.to_csv('df-data/' + evt_files[i].split('/')[-1], index=False)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    df.to_csv('data/clean/' + evt_files[i].split('/')[-1], index=False, sep='\t')
