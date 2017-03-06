@@ -5,7 +5,6 @@ the unneeded headings at the top of the files, such as <bUseQID>
 """
 
 import os
-import sys
 import glob
 
 
