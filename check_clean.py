@@ -1,6 +1,8 @@
 """
 Checks data that has been both df-transformed and had segments
 that erroneously marked the entire trial space as clean removed.
+
+TODO: Just check that there exist no segment markers in intertrial space.
 """
 
 import os
@@ -35,7 +37,7 @@ for f in files:
         elif df.iloc[i].Type[0:2] in TYPES_STOP:
             intertrial = True
 
-        if df.iloc[i].Type[0:2] in SEGS_START and intertrial == True:
+        if df.iloc[i].Type[0:2] in SEGS_START + SEGS_STOP and intertrial == True:
             found_bad_segs = True
             length = df.iloc[i+1].Latency - df.iloc[i].Latency
             print('{} | {} -> {} | {} | Next: '.format(fname, df.iloc[i].Type, df.iloc[i+1].Type, length/512), end='')
