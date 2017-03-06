@@ -1,6 +1,6 @@
 # evt-data cleaning
 
-This repository cleans up the EMSE-exported resting-state .evt files. Some of the files came in with incorrect coding -- for example, port codes marking clean segment start and end times sometimes occurred in the intertrial period. In another common case, codes that likely existed to mark the trial period were being interpreted as clean-segment markers, thus making the pipeline treat that entire trial as clean data.
+This repository cleans up the EMSE-exported resting-state .evt files. Some of the files came in with incorrect coding -- for example, port codes marking clean segment start and end times sometimes occurred in the intertrial period. In another common case, codes that likely existed to mark the trial period were being interpreted as clean-segment markers, thus making the pipeline treat that entire trial as clean data. .evt files are exported to Pandas dataframes and written out as tab-separated csv files.
 
 # steps
 
